@@ -1,0 +1,232 @@
+MariaDB [(none)]> CREATE DATABASE PT_UNTUNG_TAPI_BANGKRUT;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> USE PT_UNTUNG_TAPI_BANGKRUT;
+Database changed
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> CREATE TABLE KARYAWAN (id_karyawan int(10), id_jabatan int(5), nama_karyawan varchar(20), alamat varchar(40), tgl_lahir date, jenis_kelamin char(1), PRIMARY KEY (id_karyawan));
+Query OK, 0 rows affected (0.24 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> CREATE TABLE JABATAN (id_jabatan int(15), nama_jabatan varchar(20), masuk_tanggal date, ruangan varchar(10), gaji_pokok int(10), PRIMARY KEY (id_jabatan));
+Query OK, 0 rows affected (0.24 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> CREATE TABLE REKENING (id_karyawan int(10), nama_rekening varchar(10), jenis_rekening varchar(5), nomor_rekening int(10));
+Query OK, 0 rows affected (0.29 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> CREATE TABLE ABSENSI (id_absensi int(5), id_karyawan int(10), jam_masuk datetime, jam_keluar datetime, PRIMARY KEY (id_absensi));
+Query OK, 0 rows affected (0.31 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> CREATE TABLE PELANGGARAN (id_jabatan int(15), id_absensi int(5), nama_jenis varchar(10), keterangan varchar(10), PRIMARY KEY (id_absensi));
+Query OK, 0 rows affected (0.23 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO KARYAWAN VALUES ('1710511029','10','FIKRI_ADAMS','JL_KRAMAT_3','1999-01-19','L');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO KARYAWAN VALUES ('1710511030','11','GALUH_ABDILAH','JL_LUBANG_BUAYA','1999-02-02','L');
+Query OK, 1 row affected (0.11 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO KARYAWAN VALUES ('1710511031','12','DESSHARIO_AWM','JL_KEBON_PALA','1998-08-17','L');
+Query OK, 1 row affected (0.10 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO KARYAWAN VALUES ('1710511032','13','ISHAK_IMANUEL','JL_BAMBU_APUS','1999-05-06','L');
+Query OK, 1 row affected (0.13 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> SELECT * FROM KARYAWAN ;
++-------------+------------+---------------+-----------------+------------+---------------+
+| id_karyawan | id_jabatan | nama_karyawan | alamat          | tgl_lahir  | jenis_kelamin |
++-------------+------------+---------------+-----------------+------------+---------------+
+|  1710511029 |         10 | FIKRI_ADAMS   | JL_KRAMAT_3     | 1999-01-19 | L             |
+|  1710511030 |         11 | GALUH_ABDILAH | JL_LUBANG_BUAYA | 1999-02-02 | L             |
+|  1710511031 |         12 | DESSHARIO_AWM | JL_KEBON_PALA   | 1998-08-17 | L             |
+|  1710511032 |         13 | ISHAK_IMANUEL | JL_BAMBU_APUS   | 1999-05-06 | L             |
++-------------+------------+---------------+-----------------+------------+---------------+
+4 rows in set (0.00 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO JABATAN VALUES ('10','DEVELOP_WEB','2018-02-01','LAB_PROG','5000000');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO JABATAN VALUES ('11','PROGRAMER','2018-02-01','LAB_PROG','5000000');
+Query OK, 1 row affected (0.17 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO JABATAN VALUES ('12','SERVICE_ENGINER','2018-02-01','RUANG_LAS','5000000');
+Query OK, 1 row affected (0.09 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO JABATAN VALUES ('12','ARSITEK','2018-02-01','DESAIN','10000000');
+ERROR 1062 (23000): Duplicate entry '12' for key 'PRIMARY'
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO JABATAN VALUES ('13','ARSITEK','2018-02-01','DESAIN','10000000');
+Query OK, 1 row affected (0.11 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> SELECT * FROM JABATAN;
++------------+-----------------+---------------+-----------+------------+
+| id_jabatan | nama_jabatan    | masuk_tanggal | ruangan   | gaji_pokok |
++------------+-----------------+---------------+-----------+------------+
+|         10 | DEVELOP_WEB     | 2018-02-01    | LAB_PROG  |    5000000 |
+|         11 | PROGRAMER       | 2018-02-01    | LAB_PROG  |    5000000 |
+|         12 | SERVICE_ENGINER | 2018-02-01    | RUANG_LAS |    5000000 |
+|         13 | ARSITEK         | 2018-02-01    | DESAIN    |   10000000 |
++------------+-----------------+---------------+-----------+------------+
+4 rows in set (0.00 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO REKENING VALUES ('1710511029','FIKRI','BRI','1000900');
+Query OK, 1 row affected (0.13 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO REKENING VALUES ('1710511030','GALUH','BCA','1000901');
+Query OK, 1 row affected (0.17 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO REKENING VALUES ('1710511031','AWM','BNI','1000902');
+Query OK, 1 row affected (0.09 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO REKENING VALUES ('1710511032','ISHAK','BCA','1000903');
+Query OK, 1 row affected (0.17 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> SELECT * FROM REKENING;
++-------------+---------------+----------------+----------------+
+| id_karyawan | nama_rekening | jenis_rekening | nomor_rekening |
++-------------+---------------+----------------+----------------+
+|  1710511029 | FIKRI         | BRI            |        1000900 |
+|  1710511030 | GALUH         | BCA            |        1000901 |
+|  1710511031 | AWM           | BNI            |        1000902 |
+|  1710511032 | ISHAK         | BCA            |        1000903 |
++-------------+---------------+----------------+----------------+
+4 rows in set (0.00 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO ABSENSI VALUES ('101','1710511029','2018-02-01 08:00:00','2018-02-01 16:00:00');
+Query OK, 1 row affected (0.11 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO ABSENSI VALUES ('102','1710511030','2018-02-01 08:00:00','2018-02-01 16:00:00');
+Query OK, 1 row affected (0.11 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO ABSENSI VALUES ('103','1710511031','2018-02-01 08:00:00','2018-02-01 16:00:00');
+Query OK, 1 row affected (0.15 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO ABSENSI VALUES ('104','1710511032','2018-02-01 08:00:00','2018-02-01 16:00:00');
+Query OK, 1 row affected (0.16 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> SELECT * FROM ABSENSI;
++------------+-------------+---------------------+---------------------+
+| id_absensi | id_karyawan | jam_masuk           | jam_keluar          |
++------------+-------------+---------------------+---------------------+
+|        101 |  1710511029 | 2018-02-01 08:00:00 | 2018-02-01 16:00:00 |
+|        102 |  1710511030 | 2018-02-01 08:00:00 | 2018-02-01 16:00:00 |
+|        103 |  1710511031 | 2018-02-01 08:00:00 | 2018-02-01 16:00:00 |
+|        104 |  1710511032 | 2018-02-01 08:00:00 | 2018-02-01 16:00:00 |
++------------+-------------+---------------------+---------------------+
+4 rows in set (0.00 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> DESC PELANGGARAN;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id_jabatan | int(15)     | YES  |     | NULL    |       |
+| id_absensi | int(5)      | NO   | PRI | NULL    |       |
+| nama_jenis | varchar(10) | YES  |     | NULL    |       |
+| keterangan | varchar(10) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO PELANGGARAN VALUES ('10','101','TIDAK_ADA','BEKERJA');
+Query OK, 1 row affected (0.11 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO PELANGGARAN VALUES ('11','102','TIDAK_ADA','BEKERJA');
+Query OK, 1 row affected (0.11 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO PELANGGARAN VALUES ('12','103','TIDAK_ADA','BEKERJA');
+Query OK, 1 row affected (0.15 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> INSERT INTO PELANGGARAN VALUES ('13','104','TIDAK_ADA','BEKERJA');
+Query OK, 1 row affected (0.17 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> SELECT * FROM PELANGGARAN;
++------------+------------+------------+------------+
+| id_jabatan | id_absensi | nama_jenis | keterangan |
++------------+------------+------------+------------+
+|         10 |        101 | TIDAK_ADA  | BEKERJA    |
+|         11 |        102 | TIDAK_ADA  | BEKERJA    |
+|         12 |        103 | TIDAK_ADA  | BEKERJA    |
+|         13 |        104 | TIDAK_ADA  | BEKERJA    |
++------------+------------+------------+------------+
+4 rows in set (0.00 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> ALTER TABLE KARYAWAN ADD FOREIGN KEY (id_jabatan) REFERENCES JABATAN (id_JABATAN);
+Query OK, 4 rows affected (0.83 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> ALTER TABLE REKENING ADD FOREIGN KEY (id_karyawan) REFERENCES KARYAWAN (id_karyawan);
+Query OK, 4 rows affected (0.96 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> ALTER TABLE ABSENSI ADD FOREIGN KEY (id_karyawan) REFERENCES KARYAWAN (id_karyawan);
+Query OK, 4 rows affected (0.87 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> ALTER TABLE PELANGGARAN ADD FOREIGN KEY (id_jabatan) REFERENCES KARYAWAN (id_jabatan);
+Query OK, 4 rows affected (0.98 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> DESC KARYAWAN;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id_karyawan   | int(10)     | NO   | PRI | NULL    |       |
+| id_jabatan    | int(5)      | YES  | MUL | NULL    |       |
+| nama_karyawan | varchar(20) | YES  |     | NULL    |       |
+| alamat        | varchar(40) | YES  |     | NULL    |       |
+| tgl_lahir     | date        | YES  |     | NULL    |       |
+| jenis_kelamin | char(1)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> DESC REKENING;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| id_karyawan    | int(10)     | YES  | MUL | NULL    |       |
+| nama_rekening  | varchar(10) | YES  |     | NULL    |       |
+| jenis_rekening | varchar(5)  | YES  |     | NULL    |       |
+| nomor_rekening | int(10)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> DESC ABSENSI;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| id_absensi  | int(5)   | NO   | PRI | NULL    |       |
+| id_karyawan | int(10)  | YES  | MUL | NULL    |       |
+| jam_masuk   | datetime | YES  |     | NULL    |       |
+| jam_keluar  | datetime | YES  |     | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> DESC PELANGGARAN;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id_jabatan | int(15)     | YES  | MUL | NULL    |       |
+| id_absensi | int(5)      | NO   | PRI | NULL    |       |
+| nama_jenis | varchar(10) | YES  |     | NULL    |       |
+| keterangan | varchar(10) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> SELECT KARYAWAN. nama_karyawan, JABATAN. nama_jabatan, REKENING. nomor_rekening, ABSENSI. id_absensi, PELANGGARAN. keterangan FROM JABATAN JOIN KARYAWAN ON JABATAN.id_jabatan = KARYAWAN.id_jabatan JOIN REKENING ON KARYAWAN. id_karyawan = REKENING. id_karyawan JOIN ABSENSI ON KARYAWAN. id_karyawan = ABSENSI. id_karyawan LEFT JOIN PELANGGARAN ON JABATAN. id_jabatan = PELANGGARAN.id_jabatan ;
++---------------+-----------------+----------------+------------+------------+
+| nama_karyawan | nama_jabatan    | nomor_rekening | id_absensi | keterangan |
++---------------+-----------------+----------------+------------+------------+
+| FIKRI_ADAMS   | DEVELOP_WEB     |        1000900 |        101 | BEKERJA    |
+| GALUH_ABDILAH | PROGRAMER       |        1000901 |        102 | BEKERJA    |
+| DESSHARIO_AWM | SERVICE_ENGINER |        1000902 |        103 | BEKERJA    |
+| ISHAK_IMANUEL | ARSITEK         |        1000903 |        104 | BEKERJA    |
++---------------+-----------------+----------------+------------+------------+
+4 rows in set (0.12 sec)
+
+MariaDB [PT_UNTUNG_TAPI_BANGKRUT]> DROP DATABASE PT_UNTUNG_TAPI_BANGKRUT;
+Query OK, 5 rows affected (0.82 sec)
+
+CREATE TABLE product (
+    id_sales int NOT NULL AUTO_INCREMENT,
+    namaproduct varchar(255) NOT NULL,
+    jumlahorder int(10) NOT NULL,
+    hargasatuan int NOT NULL,
+    tanggalpenjualan date NOT NULL,
+    PRIMARY KEY (id_sales)
+);
